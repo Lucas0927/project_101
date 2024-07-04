@@ -20,13 +20,14 @@
   
   h1.spy-theme {
     font-family: "Courier New", Courier, monospace; /* Classic spy font */
-    font-size: 5em; /* Way bigger font size */
+    font-size: 8em; /* Way bigger font size */
     color: #FF073A; /* Neon-like red color */
     text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
     background-color: black; /* Black background for contrast */
     padding: 20px; /* Padding around the text */
     border: 3px solid #FF073A; /* Border matching the text color */
     display: inline-block; /* Make the background and border fit the text */
+    margin-bottom: 5rem; /* Bottom margin */
 }
   
   h1 > span {
@@ -87,9 +88,9 @@
   /* BUTTONS */
   .btn {
     font-family: "Courier New", Courier, monospace; /* Classic spy font */
-    font-size: 2em; /* Larger font size */
+    font-size: 4em; /* Larger font size */
     padding: 1rem; /* Padding around the text */
-    width: 20rem; /* Fixed width */
+    width: 30rem; /* Fixed width */
     text-align: center; /* Center align text */
     border: 0.2rem solid #FF073A; /* Red border */
     text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
@@ -97,7 +98,7 @@
     background-color: black; /* Black background */
     display: inline-block; /* Make inline block */
     text-decoration: none; /* Remove underline */
-    margin-bottom: 1rem; /* Bottom margin */
+    margin-bottom: 3rem; /* Bottom margin */
 }
   
   .btn:hover {
