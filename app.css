@@ -18,7 +18,7 @@
     margin-bottom: 1rem;
   }
   
-  h1.spy-theme {
+  .spy-theme {
     font-family: "Courier New", Courier, monospace; /* Classic spy font */
     font-size: 8em; /* Way bigger font size */
     color: #FF073A; /* Neon-like red color */
