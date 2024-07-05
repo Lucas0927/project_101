@@ -12,3 +12,33 @@
   .high-score:hover {
     transform: scale(1.025);
   }
+  
+
+  .players-list {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.player {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.start-button {
+    margin-top: 2rem;
+}
+
+.spy-theme {
+    font-family: "Courier New", Courier, monospace; /* Classic spy font */
+    font-size: 8em; /* Way bigger font size */
+    color: #FF073A; /* Neon-like red color */
+    text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+    background-color: black; /* Black background for contrast */
+    padding: 20px; /* Padding around the text */
+    border: 3px solid #FF073A; /* Border matching the text color */
+    display: inline-block; /* Make the background and border fit the text */
+    margin-bottom: 5rem; /* Bottom margin */
+}

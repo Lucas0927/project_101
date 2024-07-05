@@ -1,24 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>High Scores</title>
-    <link rel="stylesheet" href="./app.css" />
-    <link rel="stylesheet" href="./highscores.css" />
-    <link rel="icon" href="icon_path" type="image/x-icon">
-  </head>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3775445581945009"
-     crossorigin="anonymous"></script>
-  <body>
-    <div class="container">
-      <div id="highScores" class="flex-center flex-column">
-        <h1 id="finalScore">High Scores</h1>
-        <ul id="highScoresList"></ul>
-        <a class="btn" href="/">Go Home</a>
-      </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Waiting Room</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header{
+            padding: 2.5rem;
+            background-color: black; /* Black background */
+        }
+
+        .footer{
+            padding: 1rem;
+            background-color: black; /* Black background */
+        }
+
+        .players{
+            padding: 4rem;
+            background-color: black; /* Black background */
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ccc;
+        }
+
+        .spy-themed{
+            font-family: "Courier New", Courier, monospace; /* Classic spy font */
+            font-size: 2.5rem; /* Larger font size */
+            padding: 1rem; /* Padding around the text */
+            text-align: center; /* Center align text */
+            border: 0.2rem solid #FF073A; /* Red border */
+            text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+            color: #FF073A; /* Red text color */
+            background-color: black; /* Black background */
+            display: inline-block; /* Make inline block */
+            text-decoration: none; /* Remove underline */
+        }
+        .header .game-name {
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        .header .game-code {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .players {
+            flex: 1 0 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+        .players-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .player {
+            flex: 1 0 22%; /* Adjust to fit 4 players per row */
+            border: 1px solid #ccc;
+            padding: 1rem;
+            text-align: center;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .footer {
+            flex: 0 0 5%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            border-top: 1px solid #ccc;
+        }
+        .start-button {
+            padding: 1rem 2rem;
+            font-size: 1.5rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="spy-themed">
+            <span class="game-name">Liar's Gambit</span>
+        </div>
+        <div class="spy-themed">
+            <span class="game-code">PIN: 123456</span>
+        </div>
     </div>
-    <script src="./highscores.js"></script>
-  </body>
+
+    <div class="players">
+        <div class="players-list">
+            <div class="player">Player 1</div>
+            <div class="player">Player 2</div>
+            <div class="player">Player 3</div>
+            <div class="player">Player 4</div>
+            <div class="player">Player 5</div>
+            <div class="player">Player 6</div>
+            <div class="player">Player 7</div>
+            <div class="player">Player 8</div>
+            <!-- Add more players as needed -->
+        </div>
+    </div>
+
+    <div class="footer">
+        <button class="start-button">Start Game</button>
+    </div>
+
+</body>
 </html>
