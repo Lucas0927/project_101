@@ -1,44 +1,125 @@
-#highScoresList {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 4rem;
-  }
-  
-  .high-score {
-    font-size: 2.8rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .high-score:hover {
-    transform: scale(1.025);
-  }
-  
-
-  .players-list {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
+.header{
+  padding: 2.5rem;
+  background-color: black; /* Black background */
+}
+
+.footer{
+  padding: 1rem;
+  background-color: black; /* Black background */
+}
+
+.players{
+  padding: 3rem;
+  background-color: black; /* Black background */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid #FF073A; /* Red border */
+}
+
+.spy-themed1{
+  font-family: "Courier New", Courier, monospace; /* Classic spy font */
+  font-size: 2.5rem; /* Larger font size */
+  padding: 1rem; /* Padding around the text */
+  text-align: center; /* Center align text */
+  border: 0.2rem solid #FF073A; /* Red border */
+  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+  color: #FF073A; /* Red text color */
+  background-color: black; /* Black background */
+  display: inline-block; /* Make inline block */
+  text-decoration: none; /* Remove underline */
+}
+
+.spy-themed2{
+  font-family: "Courier New", Courier, monospace; /* Classic spy font */
+  font-size: 2.5rem; /* Larger font size */
+  padding: 1rem; /* Padding around the text */
+  text-align: center; /* Center align text */
+  border: 0.2rem solid #FF073A; /* Red border */
+  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+  color: #FF073A; /* Red text color */
+  background-color: black; /* Black background */
+  display: inline-block; /* Make inline block */
+  text-decoration: none; /* Remove underline */
+}
+
+.spy-themed1 a{
+  color:#ff073a;
+  text-decoration: none;
+}
+
+.header .spy-themed1:hover {
+  background-color: #FF073A; /* Hover background color */
+  color: black; /* Hover text color */
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.header .spy-themed1.[disabled]:hover {
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.header .game-name {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.header .game-code {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.players {
+  flex: 1 0 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.players-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
 .player {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #fff;
+  flex: 1 0 20%; /* Adjust to fit 4 players per row */
+  padding: 1rem;
+  font-size: 1.4rem;
+  text-align: center;
+  border-radius: 5px;
+  border: 0.2rem solid #FF073A; /* Red border */
+  color: #FF073A; /* Red text color */
+  background-color: black; /* Black background */
+  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
 }
-
+.footer {
+  flex: 0 0 5%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 1px solid #ccc;
+}
 .start-button {
-    margin-top: 2rem;
-}
-
-.spy-theme {
-    font-family: "Courier New", Courier, monospace; /* Classic spy font */
-    font-size: 8em; /* Way bigger font size */
-    color: #FF073A; /* Neon-like red color */
-    text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
-    background-color: black; /* Black background for contrast */
-    padding: 20px; /* Padding around the text */
-    border: 3px solid #FF073A; /* Border matching the text color */
-    display: inline-block; /* Make the background and border fit the text */
-    margin-bottom: 5rem; /* Bottom margin */
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
 }
