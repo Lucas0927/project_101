@@ -24,7 +24,7 @@
         }
 
         .players{
-            padding: 4rem;
+            padding: 3rem;
             background-color: black; /* Black background */
         }
 
@@ -32,10 +32,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ccc;
+            border-bottom: 3px solid #FF073A; /* Red border */
         }
 
-        .spy-themed{
+        .spy-themed1{
             font-family: "Courier New", Courier, monospace; /* Classic spy font */
             font-size: 2.5rem; /* Larger font size */
             padding: 1rem; /* Padding around the text */
@@ -47,6 +47,34 @@
             display: inline-block; /* Make inline block */
             text-decoration: none; /* Remove underline */
         }
+        .spy-themed2{
+            font-family: "Courier New", Courier, monospace; /* Classic spy font */
+            font-size: 2.5rem; /* Larger font size */
+            padding: 1rem; /* Padding around the text */
+            text-align: center; /* Center align text */
+            border: 0.2rem solid #FF073A; /* Red border */
+            text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+            color: #FF073A; /* Red text color */
+            background-color: black; /* Black background */
+            display: inline-block; /* Make inline block */
+            text-decoration: none; /* Remove underline */
+        }
+
+        .header .spy-themed1:hover {
+            background-color: #FF073A; /* Hover background color */
+            color: black; /* Hover text color */
+            cursor: pointer;
+            box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+            transform: translateY(-0.1rem);
+            transition: transform 150ms;
+        }
+        
+        .header .spy-themed1.[disabled]:hover {
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
         .header .game-name {
             padding-left: 50px;
             padding-right: 50px;
@@ -66,17 +94,19 @@
         .players-list {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 1.5rem;
             justify-content: center;
         }
         .player {
             flex: 1 0 20%; /* Adjust to fit 4 players per row */
             padding: 1rem;
+            font-size: 1.4rem;
             text-align: center;
             border-radius: 5px;
             border: 0.2rem solid #FF073A; /* Red border */
             color: #FF073A; /* Red text color */
             background-color: black; /* Black background */
+            text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
         }
         .footer {
             flex: 0 0 5%;
@@ -99,10 +129,10 @@
 <body>
 
     <div class="header">
-        <div class="spy-themed">
-            <span class="game-name">Liar's Gambit</span>
+        <div class="spy-themed1">
+            <a class="game-name">Liar's Gambit</a>
         </div>
-        <div class="spy-themed">
+        <div class="spy-themed2">
             <span class="game-code">PIN: 123456</span>
         </div>
     </div>
