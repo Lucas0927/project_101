@@ -18,23 +18,27 @@
     
     <script type="module">
         import { db } from './firebase-config.js';
-        import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+        import { collection, doc, setDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
         async function createRoom() {
             const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
             const roomRef = doc(collection(db, 'rooms'), roomCode);
 
             await setDoc(roomRef, {
-                roomCode: roomCode,
-                players: []
+                roomCode: roomCode
             });
 
-            return roomCode;
+            const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {
+                username: 'host'
+            });
+            const userId = playerRef.id; // Use Firestore auto-ID
+
+            return { roomCode, userId };
         }
 
         document.getElementById('createGameButton').addEventListener('click', async () => {
-            const roomCode = await createRoom();
-            window.location.href = `./homewaiting.html?roomCode=${roomCode}`;
+            const { roomCode, userId } = await createRoom();
+            window.location.href = `./homewaiting.html?roomCode=${roomCode}&userId=${userId}`;
         });
     </script>
 </body>
