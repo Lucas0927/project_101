@@ -1,31 +1,38 @@
-const highScoresList = document.getElementById("highScoresList");
-const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+import { db } from './firebase-config.js';
+import { collection, doc, deleteDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
-highScoresList.innerHTML = highScores
-  .map(score => {
-    return `<li class="high-score">${score.name} - ${score.score}</li>`;
-  })
-  .join("");
+// Function to remove a room
+async function removeRoom(roomCode) {
+    const roomRef = doc(collection(db, 'rooms'), roomCode);
+    const roomDoc = await getDoc(roomRef);
 
-  document.getElementById('create-room-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const roomName = document.getElementById('room-name').value;
-    
-    // For demonstration purposes, we assume the room is created successfully
-    document.getElementById('create-room-form').classList.add('hidden');
-    document.getElementById('waiting-room').classList.remove('hidden');
+    if (roomDoc.exists()) {
+        await deleteDoc(roomRef);
+    }
+}
 
-    // Simulate adding players to the room
-    const playersList = document.getElementById('players-list');
-    const playerNames = ['Player 1', 'Player 2', 'Player 3', 'Player 4'];
+document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomCode = urlParams.get('roomCode');
 
-    playerNames.forEach(playerName => {
+    if (roomCode) {
+        document.getElementById('roomCode').textContent = roomCode;
+
+        // Attach event listener to the game name link
+        document.getElementById('gameNameLink').addEventListener('click', async (event) => {
+            event.preventDefault(); // Prevent the default link behavior
+            await removeRoom(roomCode);
+            window.location.href = event.target.href; // Redirect to the index page
+        });
+
+        // Simulate adding the room creator as a player
+        const playersList = document.getElementById('players-list');
         const playerDiv = document.createElement('div');
         playerDiv.classList.add('player');
-        playerDiv.textContent = playerName;
+        playerDiv.textContent = 'Player 1'; // Replace with actual player name if available
         playersList.appendChild(playerDiv);
-    });
 
-    // Show the start button when players are added
-    document.querySelector('.start-button').classList.remove('hidden');
+        // Show the start button
+        document.querySelector('.start-button').classList.remove('hidden');
+    }
 });

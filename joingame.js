@@ -9,5 +9,7 @@ document.getElementById('roomCode').addEventListener('input', function() {
 });
 
 document.getElementById('joinButton').addEventListener('click', function() {
-    window.location.href = './enterusername.html';
+    const roomCode = document.getElementById('roomCode').value;
+    const userId = Math.random().toString(36).substring(2, 10).toUpperCase();
+    window.location.href = `./enterusername.html?roomCode=${roomCode}&userId=${userId}`;
 });
