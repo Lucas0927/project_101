@@ -72,10 +72,13 @@ body {
 }
 
 .players-list {
+  flex: 1;
+  height: 100%; /* Set height to 100% */
+  width: 50%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
+  border: 3px solid red;
 }
 
 .player {
