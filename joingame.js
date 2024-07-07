@@ -1,3 +1,6 @@
+import { db } from './firebase-config.js';
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
 document.getElementById('roomCode').addEventListener('input', function() {
     const code = this.value;
     const joinButton = document.getElementById('joinButton');
@@ -8,8 +11,12 @@ document.getElementById('roomCode').addEventListener('input', function() {
     }
 });
 
-document.getElementById('joinButton').addEventListener('click', function() {
+document.getElementById('joinButton').addEventListener('click', async function() {
     const roomCode = document.getElementById('roomCode').value;
-    const userId = Math.random().toString(36).substring(2, 10).toUpperCase();
+    const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {
+        username: 'none' // Username will be added on the next page
+    });
+    const userId = playerRef.id; // Use Firestore auto-ID
+
     window.location.href = `./enterusername.html?roomCode=${roomCode}&userId=${userId}`;
 });
