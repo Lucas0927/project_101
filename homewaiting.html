@@ -9,7 +9,7 @@
 <body>
     <header class="header">
         <div class="spy-themed1">
-            <a class="game-name" href="http://127.0.0.1:5500/index.html" id="gameNameLink">Liar's Gambit</a>
+            <a class="game-name" href="./index.html" id="gameNameLink">Liar's Gambit</a>
         </div>
         <div class="spy-themed2">
             <span class="game-code">PIN: <span id="roomCode"></span></span>
@@ -17,15 +17,15 @@
     </header>
 
     <div id="waiting-room">
-    <main class="players">
-        <div class="players-list" id="players-list">
-            <!-- Player elements will be appended here -->
-        </div>
-    </main>
+        <main class="players">
+            <div class="players-list" id="players-list">
+                <!-- Player elements will be appended here -->
+            </div>
+        </main>
 
-    <footer class="footer">
-        <button class="start-button hidden">Start Game</button>
-    </footer>
+        <footer class="footer">
+            <button class="spy-themed2" id="startButton" disabled>Start Game</button>
+        </footer>
     </div>
 
     <script type="module" src="./homewaiting.js"></script>
