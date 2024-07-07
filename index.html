@@ -29,7 +29,7 @@
             });
 
             const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {
-                username: 'host'
+                username: 'HOST'
             });
             const userId = playerRef.id; // Use Firestore auto-ID
 
