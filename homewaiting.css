@@ -6,120 +6,83 @@ body {
   height: 100vh;
 }
 
-.header{
-  padding: 2.5rem;
-  background-color: black; /* Black background */
-}
-
-.footer{
+.header, .footer, .players {
+  background-color: black;
   padding: 1rem;
-  background-color: black; /* Black background */
 }
 
-.players{
-  padding: 3rem;
-  background-color: black; /* Black background */
-}
-
-.header {
+.header, .footer {
+  padding: 2.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 3px solid #FF073A; /* Red border */
+  border-bottom: 3px solid #FF073A;
 }
 
-.spy-themed1{
-  font-family: "Courier New", Courier, monospace; /* Classic spy font */
-  font-size: 2.5rem; /* Larger font size */
-  padding: 1rem; /* Padding around the text */
-  text-align: center; /* Center align text */
-  border: 0.2rem solid #FF073A; /* Red border */
-  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
-  color: #FF073A; /* Red text color */
-  background-color: black; /* Black background */
-  display: inline-block; /* Make inline block */
-  text-decoration: none; /* Remove underline */
+.spy-themed1, .spy-themed2 {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 2.5rem;
+  padding: 1rem;
+  text-align: center;
+  border: 0.2rem solid #FF073A;
+  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A;
+  background-color: black;
+  display: inline-block;
+  text-decoration: none;
+  color: #FF073A;
 }
 
-.spy-themed2{
-  font-family: "Courier New", Courier, monospace; /* Classic spy font */
-  font-size: 2.5rem; /* Larger font size */
-  padding: 1rem; /* Padding around the text */
-  text-align: center; /* Center align text */
-  border: 0.2rem solid #FF073A; /* Red border */
-  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
-  color: #FF073A; /* Red text color */
-  background-color: black; /* Black background */
-  display: inline-block; /* Make inline block */
-  text-decoration: none; /* Remove underline */
+.spy-themed1 {
+  width: 30%; /* Increase width by 20% */
 }
 
-.spy-themed1 a{
-  color:#ff073a;
+.spy-themed1 a {
+  color: #FF073A;
   text-decoration: none;
 }
 
 .header .spy-themed1:hover {
-  background-color: #FF073A; /* Hover background color */
-  color: black; /* Hover text color */
+  background-color: #FF073A;
+  color: black;
   cursor: pointer;
   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
   transform: translateY(-0.1rem);
   transition: transform 150ms;
 }
 
-.header .spy-themed1.[disabled]:hover {
-  cursor: not-allowed;
-  box-shadow: none;
-  transform: none;
-}
-
-.header .game-name {
-  padding-left: 50px;
-  padding-right: 50px;
-}
-
-.header .game-code {
-  padding-left: 10px;
-  padding-right: 10px;
+.header .spy-themed1:hover .game-name {
+  color: black; /* Change text color to black on hover of .spy-themed1 */
 }
 
 .players {
-  flex: 1 0 50%;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: start;
+  padding: 3rem;
 }
+
 .players-list {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
 }
+
 .player {
-  flex: 1 0 20%; /* Adjust to fit 4 players per row */
+  flex: 1 0 20%;
   padding: 1rem;
   font-size: 1.4rem;
   text-align: center;
   border-radius: 5px;
-  border: 0.2rem solid #FF073A; /* Red border */
-  color: #FF073A; /* Red text color */
-  background-color: black; /* Black background */
-  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A; /* Shadow for a neon effect */
+  border: 0.2rem solid #FF073A;
+  color: #FF073A;
+  background-color: black;
+  text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A;
 }
+
 .footer {
   flex: 0 0 5%;
-  display: flex;
   justify-content: flex-end;
-  align-items: center;
-  border-top: 1px solid #ccc;
-}
-.start-button {
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
+  border-top: 3px solid #FF073A;
 }
