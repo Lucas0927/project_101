@@ -1,19 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Project 101</title>
-    <link rel="stylesheet" href="./app.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="./app.css">
+</head>
+<body>
     <div class="container">
-      <div id="home" class="flex-center flex-column">
-        <h1 class="spy-theme">Liar's Gambit</h1>
-        <a class="btn" href="./joingame.html">Join Game</a>
-        <a class="btn" href="./homewaiting.html">Create Game</a>
-      </div>
+        <div id="home" class="flex-center flex-column">
+            <h1 class="spy-theme">Liar's Gambit</h1>
+            <a class="btn" href="./joingame.html">Join Game</a>
+            <button class="btn" id="createGameButton">Create Game</button>
+        </div>
     </div>
-  </body>
+    
+    <script type="module">
+        import { db } from './firebase-config.js';
+        import { collection, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+        async function createRoom() {
+            const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const roomRef = doc(collection(db, 'rooms'), roomCode);
+
+            await setDoc(roomRef, {
+                roomCode: roomCode,
+                players: []
+            });
+
+            return roomCode;
+        }
+
+        document.getElementById('createGameButton').addEventListener('click', async () => {
+            const roomCode = await createRoom();
+            window.location.href = `./homewaiting.html?roomCode=${roomCode}`;
+        });
+    </script>
+</body>
 </html>

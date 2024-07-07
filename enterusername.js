@@ -7,3 +7,11 @@ document.getElementById('username').addEventListener('input', function() {
         useButton.disabled = true;
     }
 });
+
+document.getElementById('useButton').addEventListener('click', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const roomCode = urlParams.get('roomCode');
+    const userId = urlParams.get('userId');
+    const username = document.getElementById('username').value;
+    window.location.href = `./homewaiting.html?roomCode=${roomCode}&userId=${userId}&username=${username}`;
+});
