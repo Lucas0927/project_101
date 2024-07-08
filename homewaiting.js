@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         startButton.addEventListener('click', (event) => {
             if (!startButton.disabled) {
-                window.location.href = './game.html';
+                window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
             }
         });
     }
