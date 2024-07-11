@@ -1,0 +1,30 @@
+/* Custom styles for the Update from JSON page */
+#resultMessage {
+    margin-top: 20px;
+    color: #fff;
+    text-align: center;
+    font-size: 1.8rem; /* Increase font size */
+}
+
+.btn-back {
+    font-family: "Courier New", Courier, monospace; /* Classic spy font */
+    font-size: 3em; /* Slightly smaller font size */
+    padding: 1rem; /* Padding around the text */
+    text-align: center; /* Center align text */
+    color: #FF073A; /* Red text color */
+    background-color: transparent; /* Transparent background */
+    display: inline-block; /* Make inline block */
+    text-decoration: none; /* Remove underline */
+    margin-top: 1rem; /* Top margin */
+    margin-bottom: 3rem; /* Bottom margin */
+    opacity: 0.7; /* Make it less prominent */
+    border: none; /* Remove border */
+}
+
+.btn-back:hover {
+    text-decoration: underline; /* Underline text on hover */
+    color: #FF073A; /* Keep text color same on hover */
+    cursor: pointer;
+    transform: translateY(-0.1rem);
+    transition: transform 150ms, text-decoration 150ms;
+}

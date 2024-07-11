@@ -21,7 +21,7 @@ document.getElementById('joinButton').addEventListener('click', async function()
 
     if (!roomDoc.exists()) {
         // Show a message that says the room does not exist
-        alert("The room does not exist. Try different code.");
+        alert("The room does not exist. Try a different code.");
         return;
     }
 
@@ -31,4 +31,8 @@ document.getElementById('joinButton').addEventListener('click', async function()
     const userId = playerRef.id; // Use Firestore auto-ID
 
     window.location.href = `./enterusername.html?roomCode=${roomCode}&userId=${userId}`;
+});
+
+document.getElementById('backButton').addEventListener('click', () => {
+    window.location.href = './index.html';
 });
