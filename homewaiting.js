@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const roomCode = urlParams.get('roomCode');
     const userId = urlParams.get('userId');
+    const startButton = document.querySelector('.spy-themed3');
 
     if (roomCode) {
         document.getElementById('roomCode').textContent = roomCode;
@@ -14,7 +15,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const playersCollection = collection(db, 'rooms', roomCode, 'players');
         const roomRef = doc(db, 'rooms', roomCode);
-        const startButton = document.getElementById('startButton');
 
         // Listen for real-time updates in the players collection
         onSnapshot(playersCollection, (snapshot) => {
@@ -33,8 +33,12 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            // Enable or disable the start button based on the host status
-            startButton.disabled = !isHost;
+            // Set the visibility of the start button based on host status
+            if (isHost) {
+                startButton.style.display = 'block';
+            } else {
+                startButton.style.display = 'none';
+            }
         });
 
         onSnapshot(roomRef, (doc) => {
@@ -53,13 +57,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = event.target.href; // Redirect to the index page
         });
 
-        startButton.addEventListener('click', async (event) => {
-            if (!startButton.disabled) {
-                const roomDoc = await getDoc(roomRef);
-                await roomSetup(roomDoc, roomRef, playersCollection);
+        // Handle the START button click
+        startButton.addEventListener('click', async () => {
+            const roomDoc = await getDoc(roomRef);
+            await roomSetup(roomDoc, roomRef, playersCollection);
 
-                window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
-            }
+            window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
         });
     }
 });

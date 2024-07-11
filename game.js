@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const userRef = doc(db, 'rooms', roomCode, 'players', userId);
         const userDoc = await getDoc(userRef);
 
+        //displaying end button
         if (userDoc.exists()) {
             const username = userDoc.data().username;
             userNameElement.textContent = username;
