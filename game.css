@@ -73,24 +73,26 @@ body {
 
 .words-list {
   flex: 1;
-  height: 100%; /* Set height to 100% */
-  width: 50%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  border: 3px solid red;
+  border: 3px solid #FF073A;
+  padding: 1rem;
+  overflow-y: auto; /* Add scroll if the list is too long */
+  list-style-type: none; /* Remove default list styling */
 }
 
-.player {
-  flex: 1 0 20%;
+.words-list li {
+  margin-bottom: 1rem;
   padding: 1rem;
   font-size: 1.4rem;
-  text-align: center;
-  border-radius: 5px;
-  border: 0.2rem solid #FF073A;
   color: #FF073A;
   background-color: black;
   text-shadow: 3px 3px 8px black, 0 0 5px #FF073A, 0 0 10px #FF073A;
+  border: 0.2rem solid #FF073A;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .footer {

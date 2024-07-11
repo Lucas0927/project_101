@@ -9,20 +9,22 @@
 <body>
     <header class="header">
         <div class="spy-themed1">
-          <span class="additional-text">Your word is</span>
-            <a class="secret-word">Elephant</a>
+            <span class="additional-text">Your word is</span>
+            <a class="secret-word"></a>
         </div>
         <div class="spy-themed2">
-            <span class="user-name">username</span>
+            <span class="user-name"><span id="username"></span></span> 
         </div>
     </header>
 
     <main class="words">
-        <list class="words-list"></list>
+        <ul class="words-list"></ul>
     </main>
 
     <footer class="footer">
-        <a class="spy-themed3">END</a>
+        <a class="spy-themed3" href="#">END</a>
     </footer>
+
+    <script type="module" src="./game.js"></script>
 </body>
 </html>
