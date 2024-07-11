@@ -43,7 +43,12 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         if (roomDoc.exists()) {
             const secretWord = roomDoc.data().secretWord;
-            secretWordElement.textContent = secretWord;
+            const liarId = roomDoc.data().liar;
+            if (userId === liarId) {
+                secretWordElement.textContent = '??Guess??';
+            } else {
+                secretWordElement.textContent = secretWord;
+            }
         } else {
             console.error('No such document!');
         }
