@@ -25,7 +25,8 @@
             const roomRef = doc(collection(db, 'rooms'), roomCode);
 
             await setDoc(roomRef, {
-                roomCode: roomCode
+                roomCode: roomCode,
+                IsStarted: false,
             });
 
             const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {
