@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, onSnapshot, doc, deleteDoc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+import { collection, onSnapshot, doc, deleteDoc, getDoc, getDocs, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -27,17 +27,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 playersList.appendChild(playerDiv);
 
                 // Check if the current user is the host
-                if (playerDoc.id === userId && player.username=== 'HOST') {
+                if (playerDoc.id === userId && player.username === 'HOST') {
                     isHost = true;
                 }
             });
 
             // Enable or disable the start button based on the host status
-            if (isHost) {
-                startButton.disabled = false;
-            } else {
-                startButton.disabled = true;
-            }
+            startButton.disabled = !isHost;
         });
 
         // Attach event listener to the game name link
@@ -47,13 +43,52 @@ document.addEventListener('DOMContentLoaded', async () => {
             window.location.href = event.target.href; // Redirect to the index page
         });
 
-        startButton.addEventListener('click', (event) => {
+        startButton.addEventListener('click', async (event) => {
             if (!startButton.disabled) {
+                const roomRef = doc(db, 'rooms', roomCode);
+                const roomDoc = await getDoc(roomRef);
+                await roomSetup(roomDoc, roomRef, playersCollection);
+
                 window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
             }
         });
     }
 });
+
+async function roomSetup(roomDoc, roomRef, playersCollection) {
+    const topic = roomDoc.data().topic;
+
+    // Get the WordList array from the topic document and choose a random word
+    const topicRef = doc(db, 'Topics', topic);
+    const topicDoc = await getDoc(topicRef);
+
+    if (topicDoc.exists()) {
+        const wordList = topicDoc.data().WordList;
+        const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+
+        // Set the chosen word as the secret word in the room document
+        await updateDoc(roomRef, {
+            secretWord: randomWord
+        });
+    } else {
+        console.error(`No document found for topic: ${topic}`);
+        return;
+    }
+
+    // Choose a random userId from players and set as liar
+    const playersSnapshot = await getDocs(playersCollection);
+    const playerIds = playersSnapshot.docs.map(doc => doc.id);
+    const randomLiarId = playerIds[Math.floor(Math.random() * playerIds.length)];
+
+    await updateDoc(roomRef, {
+        liar: randomLiarId
+    });
+
+    await updateDoc(roomRef, {
+        IsStarted: true
+    });
+    
+}
 
 async function handleLeaveRoom(roomCode, userId) {
     const playerRef = doc(db, 'rooms', roomCode, 'players', userId);
