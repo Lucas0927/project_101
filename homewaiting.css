@@ -19,7 +19,7 @@ body {
   border-bottom: 3px solid #FF073A;
 }
 
-.spy-themed1, .spy-themed2 {
+.spy-themed1, .spy-themed2, .spy-themed3 {
   font-family: "Courier New", Courier, monospace;
   font-size: 2.5rem;
   padding: 1rem;
@@ -42,6 +42,15 @@ body {
 }
 
 .header .spy-themed1:hover {
+  background-color: #FF073A;
+  color: black;
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
+}
+
+.footer .spy-themed3:hover {
   background-color: #FF073A;
   color: black;
   cursor: pointer;
