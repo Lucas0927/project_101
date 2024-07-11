@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         playersList.innerHTML = ''; // Clear the list before appending
 
         const playersCollection = collection(db, 'rooms', roomCode, 'players');
+        const roomRef = doc(db, 'rooms', roomCode);
         const startButton = document.getElementById('startButton');
 
         // Listen for real-time updates in the players collection
@@ -36,6 +37,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             startButton.disabled = !isHost;
         });
 
+        onSnapshot(roomRef, (doc) => {
+            if (doc.exists()) {
+                const roomData = doc.data();
+                if (roomData.IsStarted) {
+                    window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
+                }
+            }
+        });
+
         // Attach event listener to the game name link
         document.getElementById('gameNameLink').addEventListener('click', async (event) => {
             event.preventDefault(); // Prevent the default link behavior
@@ -45,7 +55,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         startButton.addEventListener('click', async (event) => {
             if (!startButton.disabled) {
-                const roomRef = doc(db, 'rooms', roomCode);
                 const roomDoc = await getDoc(roomRef);
                 await roomSetup(roomDoc, roomRef, playersCollection);
 
@@ -81,13 +90,9 @@ async function roomSetup(roomDoc, roomRef, playersCollection) {
     const randomLiarId = playerIds[Math.floor(Math.random() * playerIds.length)];
 
     await updateDoc(roomRef, {
-        liar: randomLiarId
-    });
-
-    await updateDoc(roomRef, {
+        liar: randomLiarId,
         IsStarted: true
     });
-    
 }
 
 async function handleLeaveRoom(roomCode, userId) {
