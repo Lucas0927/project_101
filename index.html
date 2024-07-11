@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Project 101</title>
+    <title>Liar's Gambit</title>
     <link rel="stylesheet" href="./app.css">
 </head>
 <body>
     <div class="container">
         <div id="home" class="flex-center flex-column">
             <h1 class="spy-theme">Liar's Gambit</h1>
+            <a class="btn" href="./addtopic.html">Add Topic</a>
             <a class="btn" href="./joingame.html">Join Game</a>
             <button class="btn" id="createGameButton">Create Game</button>
         </div>
@@ -27,7 +28,7 @@
             await setDoc(roomRef, {
                 roomCode: roomCode,
                 IsStarted: false,
-                topic: 'Animal',
+                topic: 'Animals',
             });
 
             const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {

@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Join Game</title>
+    <link rel="stylesheet" href="./app.css">
     <link rel="stylesheet" href="./joingame.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Join a Game</h1>
-        <div class="join-game-box">
+    <div class="container flex-center flex-column">
+        <h1 class="spy-theme">Join a Game</h1>
+        <div class="join-game-box flex-center">
             <input type="text" id="roomCode" placeholder="Enter Room Code" maxlength="6">
             <button id="joinButton" disabled>Join</button>
         </div>
+        <button class="btn-back" id="backButton">Back</button>
     </div>
     <script type="module" src="./joingame.js"></script>
 </body>

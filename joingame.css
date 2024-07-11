@@ -10,10 +10,6 @@ body {
 
 .container {
     text-align: center;
-    background-color: #1c1c1c;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 h1 {
@@ -23,6 +19,9 @@ h1 {
 
 .join-game-box {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 input {
@@ -52,6 +51,22 @@ button:disabled {
     cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-    background-color: #e60033;
+.btn-back {
+    font-family: "Courier New", Courier, monospace; /* Classic spy font */
+    font-size: 1.6em; /* Slightly smaller font size */
+    padding: 0.5rem 1rem; /* Padding around the text */
+    text-align: center; /* Center align text */
+    color: #FF073A; /* Red text color */
+    background-color: transparent; /* Transparent background */
+    display: inline-block; /* Make inline block */
+    text-decoration: none; /* Remove underline */
+    margin-top: 1rem; /* Top margin */
+    opacity: 0.7; /* Make it less prominent */
+    border: none; /* Remove border */
+}
+
+.btn-back:hover {
+    text-decoration: underline; /* Underline text on hover */
+    color: #FF073A; /* Keep text color same on hover */
+    cursor: pointer;
 }
