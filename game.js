@@ -54,8 +54,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('No such document!');
         }
 
-        // Fetch and display the list of words from Topics/Animal/WordList
-        const topicRef = doc(db, 'Topics', 'Animal');
+        // Fetch and display the list of words from Topics/{topic}/WordList
+        const topic = roomDoc.data().topic;
+        const topicRef = doc(db, 'Topics', topic);
         const topicDoc = await getDoc(topicRef);
 
         if (topicDoc.exists()) {
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 wordsListElement.appendChild(listItem);
             });
         } else {
-            console.error('No such document in Topics/Animal!');
+            console.error('No such document in Topics!');
         }
     }
 
