@@ -16,33 +16,7 @@
             <button class="btn" id="createGameButton">Create Game</button>
         </div>
     </div>
-    
-    <script type="module">
-        import { db } from './firebase-config.js';
-        import { collection, doc, setDoc, addDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
-        async function createRoom() {
-            const roomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-            const roomRef = doc(collection(db, 'rooms'), roomCode);
-
-            await setDoc(roomRef, {
-                roomCode: roomCode,
-                IsStarted: false,
-                topic: 'Animals',
-            });
-
-            const playerRef = await addDoc(collection(db, 'rooms', roomCode, 'players'), {
-                username: 'HOST'
-            });
-            const userId = playerRef.id; // Use Firestore auto-ID
-
-            return { roomCode, userId };
-        }
-
-        document.getElementById('createGameButton').addEventListener('click', async () => {
-            const { roomCode, userId } = await createRoom();
-            window.location.href = `./homewaiting.html?roomCode=${roomCode}&userId=${userId}`;
-        });
-    </script>
+    <script type="module" src="./index.js"></script>
 </body>
 </html>
