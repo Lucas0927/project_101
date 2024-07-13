@@ -95,3 +95,22 @@ body {
   justify-content: flex-end;
   border-top: 3px solid #FF073A;
 }
+
+@media (max-width: 600px) {
+  .btn, .btn-back {
+      font-size: 1rem;
+      padding: 8px 16px;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+  }
+
+  .spy-themed1, .spy-themed2, .spy-themed3 {
+    font-size: 1.2rem;
+  }
+
+  .player {
+      font-size: 0.8rem;
+  }
+}

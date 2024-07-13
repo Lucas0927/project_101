@@ -100,3 +100,35 @@ body {
   justify-content: flex-end;
   border-top: 3px solid #FF073A;
 }
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+  }
+
+  .spy-themed1, .spy-themed2 {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .spy-themed3 {
+    margin-top: 1rem;
+  }
+
+  .btn, .btn-back {
+      font-size: 1rem;
+      padding: 8px 16px;
+  }
+
+  h1 {
+      font-size: 1.5rem;
+  }
+
+  .spy-themed1, .spy-themed2, .spy-themed3 {
+    font-size: 1.2rem;
+  }
+
+  .words-list li {
+      font-size: 0.9rem;
+  }
+}
