@@ -70,3 +70,14 @@ button:disabled {
     color: #FF073A; /* Keep text color same on hover */
     cursor: pointer;
 }
+
+@media (max-width: 600px) {
+    .btn, .btn-back {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .body {
+        font-size: flex;
+    }
+}
