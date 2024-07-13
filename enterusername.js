@@ -22,3 +22,7 @@ document.getElementById('useButton').addEventListener('click', async function() 
 
     window.location.href = `./homewaiting.html?roomCode=${roomCode}&userId=${userId}&username=${username}`;
 });
+
+document.getElementById('backButton').addEventListener('click', () => {
+    window.location.href = './index.html';
+});
