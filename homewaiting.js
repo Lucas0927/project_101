@@ -62,9 +62,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             const roomDoc = await getDoc(roomRef);
             await roomSetup(roomDoc, roomRef, playersCollection);
 
-            window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
+            // Wait for the update to be confirmed before proceeding with the redirection
+            const unsubscribe = onSnapshot(roomRef, (doc) => {
+                if (doc.exists() && doc.data().IsStarted) {
+                    unsubscribe(); // Unsubscribe from further updates
+                    window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
+                }
+            });
         });
-        
+
         // Listen for deletion of the room document and redirect to index page if room is deleted
         onSnapshot(roomRef, (doc) => {
             if (!doc.exists()) {
