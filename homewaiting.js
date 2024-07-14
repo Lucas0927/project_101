@@ -6,6 +6,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const roomCode = urlParams.get('roomCode');
     const userId = urlParams.get('userId');
     const startButton = document.querySelector('.spy-themed3');
+    const topicSelection = document.getElementById('topic-selection');
+    const topicsDropdown = document.getElementById('topics');
 
     if (roomCode) {
         document.getElementById('roomCode').textContent = roomCode;
@@ -33,11 +35,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 }
             });
 
-            // Set the visibility of the start button based on host status
+            // Set the visibility of the start button and topic selection based on host status
             if (isHost) {
                 startButton.style.display = 'block';
+                topicSelection.style.display = 'block';
+                loadTopics(roomRef); // Pass the roomRef to loadTopics
             } else {
                 startButton.style.display = 'none';
+                topicSelection.style.display = 'none';
             }
         });
 
@@ -59,8 +64,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         // Handle the START button click
         startButton.addEventListener('click', async () => {
+            const selectedTopic = topicsDropdown.value;
             const roomDoc = await getDoc(roomRef);
-            await roomSetup(roomDoc, roomRef, playersCollection);
+            await roomSetup(roomDoc, roomRef, playersCollection, selectedTopic);
 
             // Wait for the update to be confirmed before proceeding with the redirection
             const unsubscribe = onSnapshot(roomRef, (doc) => {
@@ -80,11 +86,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-async function roomSetup(roomDoc, roomRef, playersCollection) {
-    const topic = roomDoc.data().topic;
+async function loadTopics(roomRef) {
+    const topicsCollection = collection(db, 'Topics');
+    const topicsSnapshot = await getDocs(topicsCollection);
+    const topicsDropdown = document.getElementById('topics');
+    const roomDoc = await getDoc(roomRef);
 
-    // Get the WordList array from the topic document and choose a random word
-    const topicRef = doc(db, 'Topics', topic);
+    let currentTopic = '';
+    if (roomDoc.exists()) {
+        currentTopic = roomDoc.data().topic;
+    }
+
+    topicsSnapshot.forEach(doc => {
+        const option = document.createElement('option');
+        option.value = doc.id;
+        option.textContent = doc.id;
+        topicsDropdown.appendChild(option);
+    });
+
+    if (currentTopic) {
+        topicsDropdown.value = currentTopic; // Set the default selected option to the current topic
+    }
+}
+
+async function roomSetup(roomDoc, roomRef, playersCollection, selectedTopic) {
+    const topicRef = doc(db, 'Topics', selectedTopic);
     const topicDoc = await getDoc(topicRef);
 
     if (topicDoc.exists()) {
@@ -93,10 +119,11 @@ async function roomSetup(roomDoc, roomRef, playersCollection) {
 
         // Set the chosen word as the secret word in the room document
         await updateDoc(roomRef, {
-            secretWord: randomWord
+            secretWord: randomWord,
+            topic: selectedTopic
         });
     } else {
-        console.error(`No document found for topic: ${topic}`);
+        console.error(`No document found for topic: ${selectedTopic}`);
         return;
     }
 
