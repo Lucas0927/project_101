@@ -64,6 +64,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             window.location.href = `./game.html?roomCode=${roomCode}&userId=${userId}`;
         });
+        
+        // Listen for deletion of the room document and redirect to index page if room is deleted
+        onSnapshot(roomRef, (doc) => {
+            if (!doc.exists()) {
+                window.location.href = './index.html';
+            }
+        });
     }
 });
 

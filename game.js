@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, doc, getDoc, getDocs, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+import { doc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -9,14 +9,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     const secretWordElement = document.querySelector('.secret-word');
     const userNameElement = document.querySelector('.user-name');
     const wordsListElement = document.querySelector('.words-list');
-    const endButton = document.querySelector('.spy-themed3');
+    const endButton = document.querySelector('#endButton');
 
     if (roomCode && userId) {
         // Real-time listener for the deletion of the room
         const roomRef = doc(db, 'rooms', roomCode);
-        onSnapshot(roomRef, (docSnapshot) => {
-            if (!docSnapshot.exists()) {
-                window.location.href = 'index.html';
+        onSnapshot(roomRef, (doc) => {
+            if (doc.exists()) {
+                const roomData = doc.data();
+                if (!roomData.IsStarted) {
+                    window.location.href = `./end.html?roomCode=${roomCode}&userId=${userId}`;
+                }
             }
         });
 
@@ -24,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const userRef = doc(db, 'rooms', roomCode, 'players', userId);
         const userDoc = await getDoc(userRef);
 
-        //displaying end button
         if (userDoc.exists()) {
             const username = userDoc.data().username;
             userNameElement.textContent = username;
@@ -73,22 +75,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Handle the END button click
     endButton.addEventListener('click', async () => {
-        if (endButton.style.display === 'block') {
-            // Delete all players in the room
-            const playersCollection = collection(db, 'rooms', roomCode, 'players');
-            const playersSnapshot = await getDocs(playersCollection);
+        const roomRef = doc(db, 'rooms', roomCode);
+        const roomDoc = await getDoc(roomRef);
 
-            for (const player of playersSnapshot.docs) {
-                await deleteDoc(player.ref);
-            }
-
-            // Delete the room document
-            const roomRef = doc(db, 'rooms', roomCode);
-            const roomDoc = await getDoc(roomRef);
-            if (roomDoc.exists()) {
-                await deleteDoc(roomRef);
-            }
-            window.location.href = 'index.html';
+        if (roomDoc.exists()) {
+            window.location.href = `./end.html?roomCode=${roomCode}&userId=${userId}`;
+        } else {
+            console.error('Room does not exist!');
         }
     });
 });
