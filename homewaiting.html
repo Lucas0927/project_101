@@ -8,8 +8,8 @@
 </head>
 <body>
     <header class="header">
-        <div class="spy-themed1">
-            <a class="game-name" href="./index.html" id="gameNameLink">Liar's Gambit</a>
+        <div class="spy-themed2">
+            <a class="game-name">Liar's Gambit</a>
         </div>
         <div class="spy-themed2">
             <span class="game-code">PIN: <span id="roomCode"></span></span>
@@ -29,8 +29,14 @@
     </main>
     
     <footer class="footer">
-        <a class="spy-themed3" href="#">Start Game</a>
+        <div class="left-button-container">
+            <button id="leaveButton" class="spy-themed3 leave-button">Leave</button>
+        </div>
+        <div class="right-button-container">
+            <a class="spy-themed3 start-button" href="#">Start Game</a>
+        </div>
     </footer>
+    
 
     <script type="module" src="./homewaiting.js"></script>
 </body>

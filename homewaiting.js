@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const roomCode = urlParams.get('roomCode');
     const userId = urlParams.get('userId');
-    const startButton = document.querySelector('.spy-themed3');
+    const startButton = document.querySelector('.start-button');
+    const leaveButton = document.querySelector('.leave-button'); 
     const topicSelection = document.getElementById('topic-selection');
     const topicsDropdown = document.getElementById('topics');
 
@@ -55,11 +56,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
-        // Attach event listener to the game name link
-        document.getElementById('gameNameLink').addEventListener('click', async (event) => {
-            event.preventDefault(); // Prevent the default link behavior
+        // Attach event listener to the leave button
+        leaveButton.addEventListener('click', async () => {
             await handleLeaveRoom(roomCode, userId);
-            window.location.href = event.target.href; // Redirect to the index page
+            window.location.href = './index.html'; // Redirect to the index page
         });
 
         // Handle the START button click
