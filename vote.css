@@ -43,6 +43,11 @@ body {
     background-color: #FF073A;
     color: black;
   }
+
+  .players-list li.voted {
+    background-color: rgb(230, 112, 112);
+    color: black;
+    }
   
   .footer {
     display: flex;

@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const userRef = doc(db, 'rooms', roomCode, 'players', userId);
                 await updateDoc(userRef, { vote: selectedPlayerId });
 
+                // Mark the voted username
+                document.querySelector(`li[data-id='${selectedPlayerId}']`).classList.add('voted');
+
                 // Check if all players have voted
                 const playersSnapshot = await getDocs(playersCollection);
                 const allVotesIn = playersSnapshot.docs.every(doc => doc.data().vote);

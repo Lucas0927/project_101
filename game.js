@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { doc, getDoc, onSnapshot, updateDoc, getDocs, collection } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+import { doc, getDoc, onSnapshot, updateDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -72,6 +72,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     voteButton.addEventListener('click', async () => {
         const userRef = doc(db, 'rooms', roomCode, 'players', userId);
         await updateDoc(userRef, { readyToVote: true });
+
+        // Change the button to red and update text
+        voteButton.style.backgroundColor = 'red';
+        voteButton.style.color = 'black';
+        voteButton.textContent = 'Ready';
 
         const playersCollection = collection(db, 'rooms', roomCode, 'players');
         const playersSnapshot = await getDocs(playersCollection);
