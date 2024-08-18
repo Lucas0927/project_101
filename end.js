@@ -1,26 +1,35 @@
 import { db } from './firebase-config.js';
-import { doc, getDoc, updateDoc, deleteDoc, collection, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+import { doc, getDoc, updateDoc, deleteDoc, collection, getDocs, onSnapshot, deleteField } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const roomCode = urlParams.get('roomCode');
     const userId = urlParams.get('userId');
     const finishButton = document.querySelector('#finishButton');
+    const liarUsernameElement = document.getElementById('liarUsername');
+    const mostVotedUsernameElement = document.getElementById('mostVotedUsername');
 
     if (roomCode) {
         const roomRef = doc(db, 'rooms', roomCode);
         const roomDoc = await getDoc(roomRef);
+        const playersCollection = collection(db, 'rooms', roomCode, 'players');
 
         if (roomDoc.exists()) {
             const liarId = roomDoc.data().liar;
-            const liarRef = doc(db, 'rooms', roomCode, 'players', liarId);
-            const liarDoc = await getDoc(liarRef);
+            const mostVotedPlayerId = roomDoc.data().mostVotedPlayerId;
 
+            const liarDoc = await getDoc(doc(playersCollection, liarId));
             if (liarDoc.exists()) {
-                const liarUsername = liarDoc.data().username;
-                document.getElementById('liarUsername').textContent = liarUsername;
+                liarUsernameElement.textContent = liarDoc.data().username;
             }
 
+            const mostVotedPlayerDoc = await getDoc(doc(playersCollection, mostVotedPlayerId));
+            if (mostVotedPlayerDoc.exists()) {
+                mostVotedUsernameElement.textContent = mostVotedPlayerDoc.data().username;
+            }
+        }
+
+        if (roomDoc.exists()) {
             // Set IsStarted to false if the user is the HOST
             const userRef = doc(db, 'rooms', roomCode, 'players', userId);
             const userDoc = await getDoc(userRef);
@@ -76,6 +85,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.getElementById('playAgainButton').addEventListener('click', async () => {
+        const userRef = doc(db, 'rooms', roomCode, 'players', userId);
+        const userDoc = await getDoc(userRef);
+        await updateDoc(userDoc.ref, {
+            readyToVote: deleteField(),
+            vote: deleteField()
+        });
+
         window.location.href = `./homewaiting.html?roomCode=${roomCode}&userId=${userId}`;
     });
 });

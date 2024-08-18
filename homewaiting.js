@@ -134,7 +134,9 @@ async function roomSetup(roomDoc, roomRef, playersCollection, selectedTopic) {
 
     await updateDoc(roomRef, {
         liar: randomLiarId,
-        IsStarted: true
+        IsStarted: true,
+        readyToVote: false,
+        votesComplete: false
     });
 }
 

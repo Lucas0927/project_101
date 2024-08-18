@@ -1,5 +1,5 @@
 import { db } from './firebase-config.js';
-import { collection, doc, getDoc, getDocs, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+import { collection, doc, getDocs, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
 document.addEventListener('DOMContentLoaded', async () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -43,12 +43,26 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const userRef = doc(db, 'rooms', roomCode, 'players', userId);
                 await updateDoc(userRef, { vote: selectedPlayerId });
 
+                // Mark the voted username
+                document.querySelector(`li[data-id='${selectedPlayerId}']`).classList.add('voted');
+
                 // Check if all players have voted
                 const playersSnapshot = await getDocs(playersCollection);
                 const allVotesIn = playersSnapshot.docs.every(doc => doc.data().vote);
 
                 if (allVotesIn) {
-                    await updateDoc(roomRef, { votesComplete: true });
+                    // Calculate the player with the most votes
+                    let voteCounts = {};
+                    playersSnapshot.docs.forEach(doc => {
+                        const vote = doc.data().vote;
+                        if (vote) {
+                            voteCounts[vote] = (voteCounts[vote] || 0) + 1;
+                        }
+                    });
+
+                    // Find the player with the most votes
+                    const mostVotedPlayerId = Object.keys(voteCounts).reduce((a, b) => voteCounts[a] > voteCounts[b] ? a : b);
+                    await updateDoc(roomRef, { votesComplete: true, mostVotedPlayerId });
                 }
             } else {
                 alert('Please select a player to vote for.');
